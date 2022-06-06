@@ -1,9 +1,9 @@
-interface Country {
+export interface CountryCode {
   name: string;
   code: string;
 }
 
-export const codes: Country[] = [
+export const codes: CountryCode[] = [
   { name: "Afghanistan", code: "AF" },
   { name: "Åland Islands", code: "AX" },
   { name: "Albania", code: "AL" },
