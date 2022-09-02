@@ -18,10 +18,10 @@ export default function App() {
   ];
 
   return (
-    <div className="bg-indigo-50 w-screen h-screen">
+    <div className="bg-[#FAF7F5] w-screen h-screen">
       <div className="flex flex-col justify-center items-center gap-6 pt-20">
         <div className="w-80 h-64">
-          <Flag country={countries[0]} />
+          <Flag country={countries[random(0, 3)]} />
         </div>
         <div className="w-96">
           <Answers countries={countries} />

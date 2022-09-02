@@ -9,7 +9,7 @@ export default function Country({ country }: CountryProps) {
 
   return (
     <div className="grow">
-      <button className="w-full h-12 text-bold text-2xl border-2 border-solid rounded-md shadow-lg">{countryName}</button>
+      <button className="w-full h-12 text-xl truncate rounded-md font-mono bg-[#65C3C8]">{countryName}</button>
     </div>
   );
 }
