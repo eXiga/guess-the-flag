@@ -5,13 +5,14 @@ interface FlagProps {
 }
 
 export default function Flag({ country }: FlagProps) {
+  const flagUrl = `https://countryflagsapi.com/svg/${country.code}`;
+  console.log(flagUrl);
+
   return (
-    <div className="w-80">
       <img
-        className="w-full h-full"
-        src={`https://countryflagsapi.com/svg/${country.code}`}
+        className="object-contain h-full w-full"
+        src={flagUrl}
         alt="flag image"
       />
-    </div>
   );
 }

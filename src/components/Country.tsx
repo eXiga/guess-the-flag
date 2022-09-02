@@ -5,9 +5,11 @@ interface CountryProps {
 }
 
 export default function Country({ country }: CountryProps) {
+  const countryName = country.name.split(',', 1);
+
   return (
-    <div>
-      <p className="text-bold text-2xl">{country.name}</p>
+    <div className="grow">
+      <button className="w-full h-12 text-bold text-2xl border-2 border-solid rounded-md shadow-lg">{countryName}</button>
     </div>
   );
 }

@@ -18,9 +18,15 @@ export default function App() {
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-4">
-      <Flag country={countries[0]} />
-      <Answers countries={countries} />
+    <div className="bg-indigo-50 w-screen h-screen">
+      <div className="flex flex-col justify-center items-center gap-6 pt-20">
+        <div className="w-80 h-64">
+          <Flag country={countries[0]} />
+        </div>
+        <div className="w-96">
+          <Answers countries={countries} />
+        </div>
+      </div>
     </div>
   );
 }
