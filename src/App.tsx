@@ -1,5 +1,6 @@
 import Answers from "./components/Answers";
 import Flag from "./components/Flag";
+import Results from "./components/Results";
 import { codes } from "./data/codes";
 
 function random(min: number, max: number): number {
@@ -20,9 +21,7 @@ export default function App() {
   return (
     <div className="bg-[#FAF7F5] w-screen h-screen">
       <div className="flex flex-col justify-center items-center gap-6 pt-20">
-        <div>
-          <p>Streak: 0, Best: 0</p>
-        </div>
+        <Results />
         <div className="w-80 h-64">
           <Flag country={countries[random(0, countries.length - 1)]} />
         </div>
