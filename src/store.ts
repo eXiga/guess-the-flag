@@ -1,4 +1,5 @@
 import create from "zustand";
+import { devtools } from "zustand/middleware";
 import { CountryCode } from "./data/codes";
 
 interface GameState {
@@ -19,10 +20,12 @@ const initialState: GameState = {
   guess: "",
 };
 
-export const useGameStore = create<GameState & GameActions>()((set) => ({
-  ...initialState,
+export const useGameStore = create<GameState & GameActions>()(
+  devtools((set) => ({
+    ...initialState,
 
-  setCorrectAnswer: (answer) => set((state) => ({ correctAnswer: answer })),
-  setAnswers: (answers) => set((state) => ({ answers: answers })),
-  setGuess: (guess) => set((state) => ({ guess: guess })),
-}));
+    setCorrectAnswer: (answer) => set((state) => ({ correctAnswer: answer })),
+    setAnswers: (answers) => set((state) => ({ answers: answers })),
+    setGuess: (guess) => set((state) => ({ guess: guess })),
+  }))
+);
