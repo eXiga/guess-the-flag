@@ -1,31 +1,49 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import { CountryCode } from "./data/codes";
+import {
+  CountryCode,
+  pickOneCountry,
+  fetchRandomCountries,
+} from "./data/countries";
 
 interface GameState {
   answers: CountryCode[];
-  correctAnswer: CountryCode;
-  guess: string;
+  correctAnswer: number;
+  guess: number;
+  isPickedCorrectly: boolean;
 }
 
 interface GameActions {
-  setAnswers: (answers: CountryCode[]) => void;
-  setCorrectAnswer: (answer: CountryCode) => void;
-  setGuess: (guess: string) => void;
+  createPuzzle: () => void;
+  setGuess: (guess: number) => void;
 }
 
 const initialState: GameState = {
-  correctAnswer: { name: "", code: "" },
+  correctAnswer: -1,
   answers: [],
-  guess: "",
+  guess: -1,
+  isPickedCorrectly: false,
 };
 
 export const useGameStore = create<GameState & GameActions>()(
   devtools((set) => ({
     ...initialState,
 
-    setCorrectAnswer: (answer) => set((state) => ({ correctAnswer: answer })),
-    setAnswers: (answers) => set((state) => ({ answers: answers })),
-    setGuess: (guess) => set((state) => ({ guess: guess })),
+    createPuzzle: () =>
+      set((state) => {
+        const countries = fetchRandomCountries();
+        const answer = pickOneCountry(countries);
+
+        return {
+          ...initialState,
+          answers: countries,
+          correctAnswer: countries.indexOf(answer),
+        };
+      }),
+    setGuess: (guess) =>
+      set((state) => ({
+        guess: guess,
+        isPickedCorrectly: guess === state.correctAnswer,
+      })),
   }))
 );

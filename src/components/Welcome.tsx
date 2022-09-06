@@ -1,8 +1,7 @@
 import { useGameStore } from "../store";
-import { fetchRandomCountries, pickOneCountry } from "../data/countries";
 
 export default function Welcome() {
-  const { setAnswers, setCorrectAnswer } = useGameStore();
+  const createPuzzle = useGameStore((state) => state.createPuzzle);
 
   return (
     <div className="bg-[#FAF7F5] w-screen h-screen">
@@ -10,10 +9,7 @@ export default function Welcome() {
         <div className="w-96">
           <button
             onClick={() => {
-              const countries = fetchRandomCountries();
-              const answer = pickOneCountry(countries);
-              setAnswers(countries);
-              setCorrectAnswer(answer);
+              createPuzzle();
             }}
             className="w-full h-12 text-xl truncate rounded-md font-mono bg-[#65C3C8]"
           >

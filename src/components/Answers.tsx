@@ -8,7 +8,7 @@ export default function Answers() {
   return (
     <div className="flex flex-col justify-items-start gap-4">
       {countries.map((c, i) => (
-        <Country key={i} country={c} />
+        <Country key={i} index={i} country={c} />
       ))}
     </div>
   );
