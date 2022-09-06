@@ -1,15 +1,14 @@
 import Country from "./Country";
-import { CountryCode } from "../data/codes";
+import { useGameStore } from "../store";
 
-interface AnswersProps {
-  countries: CountryCode[];
-}
+export default function Answers() {
+  const countries = useGameStore((state) => state.answers);
+  const correctAnswer = useGameStore((state) => state.correctAnswer);
 
-export default function Answers({ countries }: AnswersProps) {
   return (
     <div className="flex flex-col justify-items-start gap-4">
-      {countries.map((c) => (
-        <Country key={c.name} country={c} />
+      {countries.map((c, i) => (
+        <Country key={i} country={c} />
       ))}
     </div>
   );

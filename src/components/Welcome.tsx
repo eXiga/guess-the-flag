@@ -1,28 +1,5 @@
 import { useGameStore } from "../store";
-import { codes, CountryCode } from "../data/codes";
-import random from "../utils/random";
-
-function fetchRandomCountries(): CountryCode[] {
-  const countries: CountryCode[] = [];
-
-  while (countries.length !== 4) {
-    if (countries.length === 0) {
-      countries.push(codes[random(0, codes.length - 1)]);
-    } else {
-      let country = codes[random(0, codes.length - 1)];
-      while (countries.includes(country)) {
-        country = codes[random(0, codes.length - 1)];
-      }
-      countries.push(country);
-    }
-  }
-
-  return countries;
-}
-
-function createGuess(from: CountryCode[]): CountryCode {
-  return from[random(0, from.length - 1)];
-}
+import { fetchRandomCountries, pickOneCountry } from "../data/countries";
 
 export default function Welcome() {
   const { setAnswers, setCorrectAnswer } = useGameStore();
@@ -34,7 +11,7 @@ export default function Welcome() {
           <button
             onClick={() => {
               const countries = fetchRandomCountries();
-              const answer = createGuess(countries);
+              const answer = pickOneCountry(countries);
               setAnswers(countries);
               setCorrectAnswer(answer);
             }}

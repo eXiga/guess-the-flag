@@ -5,9 +5,9 @@ import Welcome from "./components/Welcome";
 import { useGameStore } from "./store";
 
 export default function App() {
-  const { answers, correctAnswer } = useGameStore();
+  const answers = useGameStore((state) => state.answers);
 
-  if (answers.length === 0) {
+  if (!answers.length) {
     return <Welcome />;
   }
 
@@ -16,10 +16,10 @@ export default function App() {
       <div className="flex flex-col justify-center items-center gap-6 pt-20">
         <Results />
         <div className="w-80 h-64">
-          <Flag country={correctAnswer} />
+          <Flag />
         </div>
         <div className="w-96">
-          <Answers countries={answers} />
+          <Answers />
         </div>
       </div>
     </div>

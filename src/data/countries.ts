@@ -1,9 +1,11 @@
+import random from "../utils/random";
+
 export interface CountryCode {
   name: string;
   code: string;
 }
 
-export const codes: CountryCode[] = [
+const codes: CountryCode[] = [
   { name: "Afghanistan", code: "AF" },
   { name: "Åland Islands", code: "AX" },
   { name: "Albania", code: "AL" },
@@ -248,3 +250,25 @@ export const codes: CountryCode[] = [
   { name: "Zambia", code: "ZM" },
   { name: "Zimbabwe", code: "ZW" },
 ];
+
+export function fetchRandomCountries(): CountryCode[] {
+  const countries: CountryCode[] = [];
+
+  while (countries.length !== 4) {
+    if (countries.length === 0) {
+      countries.push(codes[random(0, codes.length - 1)]);
+    } else {
+      let country = codes[random(0, codes.length - 1)];
+      while (countries.includes(country)) {
+        country = codes[random(0, codes.length - 1)];
+      }
+      countries.push(country);
+    }
+  }
+
+  return countries;
+}
+
+export function pickOneCountry(from: CountryCode[]): CountryCode {
+  return from[random(0, from.length - 1)];
+}

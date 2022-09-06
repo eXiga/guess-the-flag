@@ -1,18 +1,13 @@
-import { CountryCode } from "../data/codes";
+import { useGameStore } from "../store";
 
-interface FlagProps {
-  country: CountryCode;
-}
-
-export default function Flag({ country }: FlagProps) {
-  const flagUrl = `https://countryflagsapi.com/svg/${country.code}`;
-  console.log(flagUrl);
+export default function Flag() {
+  const correctAnswer = useGameStore((state) => state.correctAnswer);
 
   return (
-      <img
-        className="object-contain h-full w-full"
-        src={flagUrl}
-        alt="flag image"
-      />
+    <img
+      className="object-contain h-full w-full"
+      src={`https://countryflagsapi.com/svg/${correctAnswer.code}`}
+      alt="flag image"
+    />
   );
 }
