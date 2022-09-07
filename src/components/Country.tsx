@@ -3,6 +3,7 @@ import { useGameStore } from "../store";
 
 interface CountryProps {
   country: CountryCode;
+  onClick: () => void;
   index: number; // i need it to simplify guess logic
 }
 
@@ -29,23 +30,16 @@ function buttonBackgroundColor(
   return "bg-[#65C3C8]";
 }
 
-export default function Country({ country, index }: CountryProps) {
-  const setGuess = useGameStore((state) => state.setGuess);
+export default function Country({ country, onClick, index }: CountryProps) {
   const guess = useGameStore((state) => state.guess);
   const isPickedCorrectly = useGameStore((state) => state.isPickedCorrectly);
   const correctAnswer = useGameStore((state) => state.correctAnswer);
-  const createPuzzle = useGameStore((state) => state.createPuzzle);
   const countryName = country.name.split(",", 1)[0];
 
   return (
     <div className="grow">
       <button
-        onClick={() => {
-          setTimeout(() => {
-            createPuzzle();
-          }, 2000);
-          return setGuess(index);
-        }}
+        onClick={onClick}
         className={`w-full h-12 text-xl truncate rounded-md font-mono ${buttonBackgroundColor(
           guess,
           isPickedCorrectly,
