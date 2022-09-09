@@ -1,5 +1,4 @@
 import { CountryCode } from "../data/countries";
-import { useGameStore } from "../store";
 
 interface CountryProps {
   country: CountryCode;
