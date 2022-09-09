@@ -24,8 +24,7 @@ export default function Answers() {
             setTimeout(() => {
               createPuzzle();
             }, 2000);
-            increaseStreak();
-            return setGuess(i);
+            setGuess(i);
           }}
         />
       ))}

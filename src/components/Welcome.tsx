@@ -1,7 +1,7 @@
 import { useGameStore } from "../store";
 
 export default function Welcome() {
-  const createPuzzle = useGameStore((state) => state.createPuzzle);
+  const init = useGameStore((state) => state.init);
 
   return (
     <div className="bg-[#FAF7F5] w-screen h-screen">
@@ -9,7 +9,7 @@ export default function Welcome() {
         <div className="w-96">
           <button
             onClick={() => {
-              createPuzzle();
+              init();
             }}
             className="w-full h-12 text-xl truncate rounded-md font-mono bg-[#65C3C8]"
           >
