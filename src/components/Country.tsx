@@ -4,7 +4,10 @@ import { useGameStore } from "../store";
 interface CountryProps {
   country: CountryCode;
   onClick: () => void;
-  index: number; // i need it to simplify guess logic
+  currentIndex: number; // i need it to simplify guess logic
+  guessIndex: number;
+  isPickedCorrectly: boolean;
+  correctAnswerIndex: number;
 }
 
 function buttonBackgroundColor(
@@ -30,10 +33,14 @@ function buttonBackgroundColor(
   return "bg-[#65C3C8]";
 }
 
-export default function Country({ country, onClick, index }: CountryProps) {
-  const guess = useGameStore((state) => state.guess);
-  const isPickedCorrectly = useGameStore((state) => state.isPickedCorrectly);
-  const correctAnswer = useGameStore((state) => state.correctAnswer);
+export default function Country({
+  country,
+  onClick,
+  currentIndex,
+  guessIndex,
+  isPickedCorrectly,
+  correctAnswerIndex,
+}: CountryProps) {
   const countryName = country.name.split(",", 1)[0];
 
   return (
@@ -41,10 +48,10 @@ export default function Country({ country, onClick, index }: CountryProps) {
       <button
         onClick={onClick}
         className={`w-full h-12 text-xl truncate rounded-md font-mono ${buttonBackgroundColor(
-          guess,
+          guessIndex,
           isPickedCorrectly,
-          index,
-          correctAnswer
+          currentIndex,
+          correctAnswerIndex
         )}`}
       >
         {countryName}
