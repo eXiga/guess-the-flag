@@ -49,12 +49,13 @@ export const useGameStore = create<GameState & GameActions>()(
     setGuess: (guess) =>
       set((state) => {
         const isCorrect = guess === state.correctAnswer;
+        const nextStreakValue = state.streak + 1;
 
         return {
-          streak: isCorrect ? state.streak + 1 : 0,
+          streak: isCorrect ? nextStreakValue : 0,
           best:
-            isCorrect && state.streak + 1 > state.best
-              ? state.streak + 1
+            isCorrect && nextStreakValue > state.best
+              ? nextStreakValue
               : state.best,
           guess: guess,
           isPickedCorrectly: isCorrect,
