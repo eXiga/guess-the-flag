@@ -5,7 +5,6 @@ export default function Answers() {
   const countries = useGameStore((state) => state.answers);
   const createPuzzle = useGameStore((state) => state.createPuzzle);
   const setGuess = useGameStore((state) => state.setGuess);
-  const increaseStreak = useGameStore((state) => state.increaseStreak);
   const isPickedCorrectly = useGameStore((state) => state.isPickedCorrectly);
   const guessIndex = useGameStore((state) => state.guess);
   const correctAnswerIndex = useGameStore((state) => state.correctAnswer);
@@ -22,7 +21,7 @@ export default function Answers() {
           correctAnswerIndex={correctAnswerIndex}
           onClick={() => {
             setTimeout(() => {
-              createPuzzle();
+              createPuzzle(false);
             }, 2000);
             setGuess(i);
           }}

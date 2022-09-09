@@ -16,10 +16,8 @@ interface GameState {
 }
 
 interface GameActions {
-  init: () => void;
-  createPuzzle: () => void;
+  createPuzzle: (shouldResetState: boolean) => void;
   setGuess: (guess: number) => void;
-  increaseStreak: () => void;
 }
 
 const initialState: GameState = {
@@ -35,27 +33,15 @@ export const useGameStore = create<GameState & GameActions>()(
   devtools((set) => ({
     ...initialState,
 
-    init: () =>
+    createPuzzle: (shouldResetState) =>
       set((state) => {
         const countries = fetchRandomCountries();
         const answer = pickOneCountry(countries);
 
         return {
           ...initialState,
-          answers: countries,
-          correctAnswer: countries.indexOf(answer),
-        };
-      }),
-
-    createPuzzle: () =>
-      set((state) => {
-        const countries = fetchRandomCountries();
-        const answer = pickOneCountry(countries);
-
-        return {
-          ...initialState,
-          streak: state.streak,
-          best: state.best,
+          streak: shouldResetState ? 0 : state.streak,
+          best: shouldResetState ? 0 : state.best,
           answers: countries,
           correctAnswer: countries.indexOf(answer),
         };
@@ -74,10 +60,5 @@ export const useGameStore = create<GameState & GameActions>()(
           isPickedCorrectly: isCorrect,
         };
       }),
-    increaseStreak: () =>
-      set((state) => ({
-        streak: state.streak + 1,
-        best: state.streak + 1 > state.best ? state.streak + 1 : state.best,
-      })),
   }))
 );
